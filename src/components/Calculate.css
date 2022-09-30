@@ -1,0 +1,30 @@
+button {
+    width: 80px;
+    font-size: 40px;
+    color: rgb(44, 44, 44);
+    height: 70px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.Container {
+    width : 250px;
+    height : 300px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    margin: 0 auto;
+}
+
+input {
+    text-align: right;
+    color:cadetblue;
+    background-color: azure;
+    padding-right: 10px;
+    margin: 5px;
+    width: 280px;
+    height: 50px;
+    border: 2px solid skyblue;
+    border-radius: 10px;
+    font-size: 40px;
+}

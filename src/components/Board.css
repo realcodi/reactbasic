@@ -1,0 +1,65 @@
+footer button {
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    margin: 5px;
+}
+header {
+    background: indianred;
+    color: white;
+    padding: 10px;
+}
+header a {
+    text-decoration: none;
+    color: white;
+}
+nav {
+    padding: 15px;
+    text-align: left;
+    max-height: 155px;
+}
+
+li {
+    height: 25px;
+}
+li a {
+    text-decoration: none;
+    color: black;
+}
+nav span {
+    font-size: 14px;
+    color: indianred;
+}
+article {
+    height: 350px;
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    margin: 5px;
+    white-space: pre-line;
+    text-align: left;
+}
+article h3 {
+    border-bottom: 1px dotted lightgray;
+    padding-bottom: 10px;
+    color: rgb(102, 69, 7);
+}
+footer {
+    padding: 15px;
+    background-color:gainsboro
+}
+form {
+    text-align: center;
+}
+form input {
+    width: 90%;
+    height: 30px;
+    padding: 10px;
+}
+form textarea {
+    margin:5px;
+    padding: 10px;
+    width: 90%;
+    height: 200px;
+    
+}
