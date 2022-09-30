@@ -17,7 +17,7 @@ App.js에서 필요한 컴포넌트를 랜더링해서 실습을 진행해보세
 1. 하나의 부모요소  
 
 
-    ``` react
+    ``` js
     function App() {
         return (
             <div>Hello</div>
@@ -30,7 +30,7 @@ App.js에서 필요한 컴포넌트를 랜더링해서 실습을 진행해보세
 2. 자바스크립트 표현식
 <br/>
 
-    ``` react
+    ``` js
     function App() {
         const name = 'jin';
         return (
@@ -44,7 +44,7 @@ App.js에서 필요한 컴포넌트를 랜더링해서 실습을 진행해보세
 3. 조건문
 <br/>
 
-    ``` react
+    ``` js
     function App() {
         let who = '';
         const account = 'Y';
@@ -61,7 +61,7 @@ App.js에서 필요한 컴포넌트를 랜더링해서 실습을 진행해보세
     }
     ``` 
 
-    ``` react
+    ``` js
     function App() {
         const account = 'N';
         return (
@@ -76,7 +76,7 @@ App.js에서 필요한 컴포넌트를 랜더링해서 실습을 진행해보세
     }
     ``` 
 
-    ``` react
+    ``` js
     function App() {
         const account = 'N';
         return (
@@ -91,7 +91,7 @@ App.js에서 필요한 컴포넌트를 랜더링해서 실습을 진행해보세
 4. 스타일, 카멜표기
 <br/>
 
-    ``` react
+    ``` js
     function App() {
         const style = {
             backgroundColor : 'blue',
@@ -111,7 +111,7 @@ App.js에서 필요한 컴포넌트를 랜더링해서 실습을 진행해보세
 5. 주석 
 <br/>
 
-    ``` react
+    ``` js
     function App() {
         // 한 줄 주석 사용
         /*
@@ -145,7 +145,7 @@ App.js에서 필요한 컴포넌트를 랜더링해서 실습을 진행해보세
 
     - react 18 이후 
 
-    ``` react
+    ``` js
     import ReactDOM from 'react-dom/client';
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
@@ -154,7 +154,7 @@ App.js에서 필요한 컴포넌트를 랜더링해서 실습을 진행해보세
     ```
 
     - react 18 이전
-    ``` react
+    ``` js
     import ReactDOM from 'react-dom';
     ReactDOM.render(
         <App />,
@@ -166,7 +166,7 @@ App.js에서 필요한 컴포넌트를 랜더링해서 실습을 진행해보세
 
 2. 엘리먼트 업데이트
 
-    ``` react
+    ``` js
     import ReactDOM from 'react-dom/client';
     const root = ReactDOM.createRoot(document.getElementById('root'));
     function tick() {
@@ -181,12 +181,12 @@ App.js에서 필요한 컴포넌트를 랜더링해서 실습을 진행해보세
 
 3. 컴포넌트 반복과 배열
 
-    ``` react
+    ``` js
     export default function Welcome(props) {
         return <h1>Hello, {props.name}!!</h1>;
     }
     ```
-    ``` react
+    ``` js
     import Welcome from './components/Welcome';
     function App() {
         const people = ['John', 'Amy', 'Kein', 'Lora', 'Zem'];
@@ -216,7 +216,7 @@ App.js에서 필요한 컴포넌트를 랜더링해서 실습을 진행해보세
 1. 컴포넌트와 key
 
     - key 속성 없음
-    ``` react
+    ``` js
     function App() {
         const array = ['A', 'B', 'add', 'C', 'D'];
         return (
@@ -227,7 +227,7 @@ App.js에서 필요한 컴포넌트를 랜더링해서 실습을 진행해보세
     }
     ```
     - key 속성 있음
-    ``` react
+    ``` js
     function App() {
         const array = [
             {value : 'A', id : 1},
@@ -249,7 +249,7 @@ App.js에서 필요한 컴포넌트를 랜더링해서 실습을 진행해보세
 2. 속성 기본값 설정하기
 
     - defaultProps 사용
-    ``` react
+    ``` js
     export default function Welcome(props) {
         return <h1>Hello, {props.name}!!</h1>;
     }
@@ -263,13 +263,13 @@ App.js에서 필요한 컴포넌트를 랜더링해서 실습을 진행해보세
 3. 속성값 전달하기
 
     - 비구조화 할당 속성 처리
-    ``` react
+    ``` js
     function Hello({style, name}){ 
         return <div style={sytle}>Hello, {name}!!</div>;
     }
     ``` 
     - 스프레드 연산자 사용
-    ``` react
+    ``` js
     function App() {
         const props = {
             name : 'react',
