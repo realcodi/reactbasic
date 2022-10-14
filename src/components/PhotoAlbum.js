@@ -1,11 +1,11 @@
-import data from './albumData';
+import imageData from './albumData';
 import './Album.css';
 import { useState } from 'react';
 function Photo(props) {
     const path = '../images/' + props.value.fileName + '.jpg';
     return <div className='Container'>      
         <img src={path} alt='' onClick={e => {
-            props.onCLickMode(path);
+            props.onClickMode(path);
         }}></img>
         <div>{props.value.title}</div>
         <div>{new Date(props.value.date).toLocaleDateString()}</div>
@@ -14,7 +14,7 @@ function Photo(props) {
 function Search(props) {
     return <form onSubmit={e => {
         e.preventDefault();
-        const searched = data.filter(item => item.title.includes(props.text));
+        const searched = imageData.filter(item => item.title.includes(props.text));
         if(searched.length > 0) props.onSearch(searched);
         else props.onSearch([]);
     }}>
@@ -33,40 +33,42 @@ function Search(props) {
 function Sort(props) {
     return <div className='sort'>
         <span onClick={e => {
-            const result = data.concat().sort((a, b) => {
-                if(a.title > b.title) return 1;
-                else if(a.title < b.title) return -1;
-                else return 0;
-            });
+            const result = imageData.concat().sort((a, b) => a.title.localeCompare(b.title));
             props.onSort(result);
         }}>가나다순</span>
         <span onClick={e => {
-            props.onSort(data.sort((a, b) => b.date - a.date));
+            props.onSort(imageData.sort((a, b) => b.date - a.date));
         }}>최신순</span>
     </div>;
 }
 /* 자세히 보기 기능 만들기 */
 function Detail(props) {
     return <div className='detail'>
-        <img src={props.path} onClick={e => props.close()}></img>
+        <img 
+            src={props.path} 
+            onClick={e => props.close()}
+        />
     </div>;
 }
-export default function MiniAlbum() {
-    const [list, setList] = useState(data);
+export default function PhotoAlbum() {
+    const [list, setList] = useState(imageData);
     const [keyword, setKeyword] = useState('');
     const [clicked, setClicked] = useState(false);
-    const photos = list.map(i => <Photo key={i.fileName} value={i} onCLickMode={path => setClicked(path)}/>);
+    const photos = list.map(i => <Photo key={i.fileName} value={i} onClickMode={path => setClicked(path)}/>);
     return <div className='album'>
         <Search
             text={keyword}
             onSearch={result => setList(result)}
-            onChangeMode={t => setKeyword(t)}
+            onChangeMode={result => setKeyword(result)}
         />
         <Sort onSort={result  => setList(result)}/>
         <div className='grid'>
             {photos}
         </div>
 
-        {clicked && <Detail path={clicked} close={() => setClicked(false)}/>}
+        {clicked && <Detail 
+            path={clicked} 
+            close={() => setClicked(false)}
+        />}
     </div>;
 }
