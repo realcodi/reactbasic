@@ -1,12 +1,10 @@
 import './Board.css';
+import memoData from './memoData';
 import { useState } from 'react';
 export default function MemoBoard() {
-    const [memos, setMemos] = useState([
-        {id: '1', title : '리액트 props', desc: 'props는 자식요소로 전달됩니다.'}, 
-        {id: '2', title : '리액트 state', desc: 'state는 컴포넌트 내에서 관리합니다.'}, 
-    ]);
+    const [memos, setMemos] = useState(memoData);
     const [mode, setMode] = useState('INIT');
-    const [id, setId] = useState(null);
+    const [memoId, setMemoId] = useState(null);
 
     const Article = (props) => {
         return <article>
@@ -24,7 +22,7 @@ export default function MemoBoard() {
                     id : Date.now().toString()
                 };
                 setMemos([...memos, memo]);
-                setId(memo.id);
+                setMemoId(memo.id);
                 setMode('READ');
             }}>
                 <input placeholder='제목' />
@@ -41,7 +39,7 @@ export default function MemoBoard() {
                 e.preventDefault();
                 let copy = [...memos];
                 for(let i=0; i<copy.length; i++){
-                    if(id === copy[i].id){
+                    if(copy[i].id === memoId){
                         copy[i].title = title;
                         copy[i].desc = desc;
                         break;
@@ -54,7 +52,8 @@ export default function MemoBoard() {
                     value={title}
                     placeholder='제목'
                     onChange={(e) => {
-                        setTitle(e.target.value);                    }}
+                        setTitle(e.target.value);                    
+                    }}
                 />
                 <textarea 
                     value={desc}
@@ -72,40 +71,43 @@ export default function MemoBoard() {
             <a id={props.id} href={"/read/" + props.id} onClick={ e => {
                 e.preventDefault();
                 setMode('READ');
-                setId(e.target.id);
+                setMemoId(e.target.id);
             }}>{props.title}</a>
         </li>;
     }
-    const IconBtn = (props) => {
-        const btn = {
-            'create' : {
-                'icon' : 'plus',
-                'event' : () => {
+    const Button = (props) => {
+        const buttonType = {
+            create : {
+                icon : 'plus',
+                event : () => {
                     setMode('CREATE');
                 }
             },
-            'canceal' :  {
-                'icon' : 'xmark',
-                'event' : () => {
+            canceal :  {
+                icon : 'xmark',
+                event : () => {
                     setMode(mode ==='CREATE' ? 'INIT' : 'READ');
                 }
             },
-            'update' : {
-                'icon' : 'pen',
-                'event' : () => {
+            update : {
+                icon : 'pen',
+                event : () => {
                     setMode('UPDATE');
                 }
             },
-            'delete' : {
-                'icon' : 'trash',
-                'event' : () => {
-                    const deleted = memos.filter(m => m.id !== id);
-                    setMemos(deleted);
+            delete : {
+                icon : 'trash',
+                event : () => {
+                    const deleteIndex = memos.findIndex(o => o.id === memoId);
+                    memos.splice(deleteIndex, 1);
+                    setMemos([...memos]);
                     setMode('INIT');
                 }
             }
         };
-        return <button onClick={btn[props.type].event}><i className={"fa-sharp fa-solid fa-"+btn[props.type].icon+" fa-lg"}></i></button>;
+        return <button onClick={buttonType[props.type].event}>
+            <i className={"fa-sharp fa-solid fa-" + buttonType[props.type].icon + " fa-lg"}></i>
+        </button>;
     }
 
     let content = null;
@@ -114,7 +116,7 @@ export default function MemoBoard() {
     } else if(mode === 'READ' || mode === 'UPDATE'){
         let title, desc = null;
         for(let i=0; i<memos.length; i++) {
-            if(id === memos[i].id) {
+            if(memos[i].id === memoId) {
                 title = memos[i].title;
                 desc = memos[i].desc;
                 break;
@@ -139,10 +141,10 @@ export default function MemoBoard() {
         </nav>
         {content}
         <footer>        
-            {mode !== 'CREATE' && <IconBtn type='create'/>}
-            {(mode === 'CREATE' || mode === 'UPDATE') && <IconBtn type='canceal'/>}
-            {mode === 'READ' && <IconBtn type='update'/>}
-            {mode === 'READ' &&<IconBtn type='delete'/>}
+            {mode !== 'CREATE' && <Button type='create'/>}
+            {(mode === 'CREATE' || mode === 'UPDATE') && <Button type='canceal'/>}
+            {mode === 'READ' && <Button type='update'/>}
+            {mode === 'READ' &&<Button type='delete'/>}
         </footer>
     </>;
 }
