@@ -1,10 +1,9 @@
 import { useState } from "react";
 export default function List() {
-    let arr = ['javascript', 'css', 'html'];
-    let [list, setList] = useState(arr);
+    const [list, setList] = useState(['javascript', 'css', 'html']);
     return <>
-        <button onClick={()=>{
-            let copy = [...list];
+        <button onClick={(e)=>{
+            const copy = [...list];
             copy[0] = 'react';
             setList(copy);
             console.log(list, copy);
